@@ -3,199 +3,418 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tobie Jansen van Vuuren | Software Engineer</title>
+    <title>Tobie Jansen van Vuuren | Full-Stack & Systems Developer</title>
     <style>
+        /* TOKYO NIGHT INSPIRED THEME */
         :root {
-            --bg-color: #0f172a;
-            --surface-color: #1e293b;
-            --text-main: #f8fafc;
-            --text-muted: #94a3b8;
-            --accent: #38bdf8;
+            --bg-color: #1a1b26;
+            --surface: #24283b;
+            --surface-highlight: #414868;
+            --text-main: #c0caf5;
+            --text-muted: #9aa5ce;
+            --accent-blue: #7aa2f7;
+            --accent-purple: #bb9af7;
+            --accent-green: #9ece6a;
         }
 
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            font-family: 'Inter', system-ui, -apple-system, sans-serif;
         }
 
         body {
             background-color: var(--bg-color);
             color: var(--text-main);
-            line-height: 1.6;
+            line-height: 1.7;
+            -webkit-font-smoothing: antialiased;
         }
 
-        header {
-            background-color: var(--surface-color);
-            padding: 4rem 2rem;
-            text-align: center;
-            border-bottom: 2px solid var(--accent);
-        }
-
-        h1 {
-            font-size: 3rem;
-            margin-bottom: 0.5rem;
-            letter-spacing: -0.05em;
-        }
-
-        h2 {
-            font-size: 1.5rem;
-            color: var(--accent);
-            font-weight: 400;
-        }
-
+        /* LAYOUT & CONTAINERS */
         .container {
-            max-width: 900px;
+            max-width: 1100px;
             margin: 0 auto;
-            padding: 3rem 2rem;
+            padding: 0 2rem;
         }
 
         section {
-            margin-bottom: 3.5rem;
+            padding: 5rem 0;
+            border-bottom: 1px solid var(--surface-highlight);
         }
 
-        .section-title {
-            font-size: 1.75rem;
+        section:last-child {
+            border-bottom: none;
+        }
+
+        /* HERO SECTION */
+        .hero {
+            text-align: center;
+            padding: 8rem 2rem 5rem;
+            background: linear-gradient(180deg, rgba(26,27,38,1) 0%, rgba(36,40,59,0.4) 100%);
+        }
+
+        .logo {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            object-fit: cover;
             margin-bottom: 1.5rem;
-            border-bottom: 1px solid var(--surface-color);
-            padding-bottom: 0.5rem;
-            color: var(--accent);
+            border: 3px solid var(--accent-blue);
+            box-shadow: 0 0 20px rgba(122, 162, 247, 0.3);
+            transition: transform 0.3s ease;
         }
 
-        .about-text {
-            font-size: 1.1rem;
+        .logo:hover {
+            transform: scale(1.05);
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            color: #fff;
+            margin-bottom: 0.5rem;
+            letter-spacing: -1px;
+        }
+
+        .hero h2 {
+            font-size: 1.5rem;
+            color: var(--accent-purple);
+            font-weight: 400;
+            margin-bottom: 2rem;
+        }
+
+        .ethos-box {
+            background-color: var(--surface);
+            border-left: 4px solid var(--accent-blue);
+            padding: 2rem;
+            border-radius: 0 8px 8px 0;
+            max-width: 800px;
+            margin: 0 auto 2rem;
+            text-align: left;
+            font-size: 1.05rem;
             color: var(--text-muted);
-            text-align: justify;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
         }
 
-        .skills-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+        .ethos-box strong {
+            color: var(--text-main);
+        }
+
+        .social-badges {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-top: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .social-badges img {
+            transition: transform 0.2s;
+        }
+
+        .social-badges img:hover {
+            transform: translateY(-3px);
+        }
+
+        /* SECTION TITLES */
+        .section-title {
+            font-size: 2rem;
+            color: #fff;
+            margin-bottom: 2rem;
+            display: flex;
+            align-items: center;
             gap: 1rem;
         }
 
-        .skill-tag {
-            background-color: var(--surface-color);
-            color: var(--text-main);
-            padding: 0.75rem;
+        .section-title::after {
+            content: "";
+            height: 1px;
+            flex-grow: 1;
+            background: linear-gradient(90deg, var(--surface-highlight), transparent);
+        }
+
+        /* ABOUT LIST */
+        .about-list {
+            list-style: none;
+        }
+
+        .about-list li {
+            position: relative;
+            padding-left: 2rem;
+            margin-bottom: 1.5rem;
+            font-size: 1.1rem;
+        }
+
+        .about-list li::before {
+            content: "▹";
+            position: absolute;
+            left: 0;
+            color: var(--accent-green);
+            font-size: 1.2rem;
+        }
+
+        /* SKILLS BADGES */
+        .skills-category {
+            margin-bottom: 2rem;
+        }
+
+        .skills-category h4 {
+            color: var(--accent-blue);
+            margin-bottom: 1rem;
+            font-size: 1.1rem;
+        }
+
+        .badge-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        /* PROJECT CARDS (CSS GRID) */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2rem;
+        }
+
+        .card {
+            background-color: var(--surface);
+            border: 1px solid var(--surface-highlight);
+            border-radius: 12px;
+            padding: 2rem;
+            transition: all 0.3s ease;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            border-color: var(--accent-purple);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
+
+        .card h3 {
+            color: #fff;
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+        }
+
+        .card p {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            margin-bottom: 1rem;
+            flex-grow: 1;
+        }
+
+        .card .focus {
+            font-size: 0.85rem;
+            color: var(--accent-blue);
+            margin-bottom: 1.5rem;
+            font-family: monospace;
+        }
+
+        .card a {
+            display: inline-block;
+            text-decoration: none;
+            color: var(--bg-color);
+            background-color: var(--accent-blue);
+            padding: 0.6rem 1.2rem;
             border-radius: 6px;
-            text-align: center;
-            font-weight: 500;
-            border: 1px solid transparent;
-            transition: border 0.3s ease;
-        }
-
-        .skill-tag:hover {
-            border: 1px solid var(--accent);
-        }
-
-        .project-card, .experience-card {
-            background-color: var(--surface-color);
-            padding: 1.5rem;
-            border-radius: 8px;
-            margin-bottom: 1rem;
-        }
-
-        .project-title {
-            font-size: 1.25rem;
-            margin-bottom: 0.25rem;
-        }
-
-        .date-role {
             font-size: 0.9rem;
-            color: var(--accent);
-            margin-bottom: 1rem;
+            font-weight: 600;
+            text-align: center;
+            transition: background-color 0.2s;
         }
 
-        .contact-links {
+        .card a:hover {
+            background-color: #8db0f9;
+        }
+
+        /* GITHUB STATS */
+        .stats-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1.5rem;
+        }
+
+        .stats-row {
             display: flex;
             justify-content: center;
-            gap: 2rem;
-            margin-top: 2rem;
+            flex-wrap: wrap;
+            gap: 1.5rem;
+            width: 100%;
         }
 
-        .contact-links a {
-            color: var(--accent);
-            text-decoration: none;
-            font-size: 1.1rem;
-            transition: color 0.3s;
+        .stats-container img {
+            max-width: 100%;
+            border-radius: 8px;
         }
 
-        .contact-links a:hover {
-            color: #fff;
-        }
-
+        /* FOOTER */
         footer {
             text-align: center;
-            padding: 2rem;
+            padding: 4rem 2rem;
             color: var(--text-muted);
-            font-size: 0.9rem;
+            font-style: italic;
+            background-color: var(--surface);
         }
     </style>
 </head>
 <body>
 
-    <header>
-        <h1>Tobie Jansen van Vuuren</h1>
-        <h2>Software Engineering Student | Backend Architecture Specialist</h2>
-        <div class="contact-links">
-            <a href="mailto:your.email@example.com">Email Me</a>
-            <a href="https://github.com/yourusername" target="_blank">GitHub</a>
-            <a href="https://linkedin.com/in/yourusername" target="_blank">LinkedIn</a>
+    <div class="hero">
+        <div class="container">
+            <img src="logo.png" alt="Tobie's Logo" class="logo" onerror="this.style.display='none'"> 
+            
+            <h1>Hi, I'm Tobie Jansen van Vuuren</h1>
+            <h2>Full-Stack & Systems Developer</h2>
+            
+            <div class="ethos-box">
+                <p><strong>Code is temporary. Its impact on human lives is absolute.</strong></p>
+                <br>
+                <p>We construct databases and pipelines to carry real human weight. People rely on our logic to manage their health, track their information, and safeguard their livelihoods. Technology is merely the medium. Human dignity and safety are the ultimate measures of the work.</p>
+                <br>
+                <p>Engineering is fundamentally an act of stewardship and a fragile system is a direct breach of trust. As a Full-stack & Systems Developer, my focus is to build architecture that honors this moral obligation by demanding strict security, clean design, and deeply maintainable logic. I work to ensure the systems we depend on remain steadfast, invisible, and worthy of the people they serve.</p>
+            </div>
+
+            <div class="social-badges">
+                <a href="https://www.linkedin.com/in/tobiejansenvanvuuren/" target="_blank"><img src="https://img.shields.io/badge/LinkedIn-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white" alt="LinkedIn"></a>
+                <a href="https://TobesOfCode.github.io" target="_blank"><img src="https://img.shields.io/badge/Portfolio-000000?style=for-the-badge&logo=aboutdotme&logoColor=white" alt="Portfolio"></a>
+                <a href="mailto:tobiejvv@gmail.com"><img src="https://img.shields.io/badge/Email-D14836?style=for-the-badge&logo=gmail&logoColor=white" alt="Email"></a>
+            </div>
         </div>
-    </header>
+    </div>
 
     <div class="container">
         
         <section>
-            <h3 class="section-title">About Me</h3>
-            <p class="about-text">
-                I am a motivated and disciplined Bachelor of Computing student specialising in Software Engineering. Recognised for a commitment to academic excellence, I am a natural leader and strong communicator who takes pride in selflessly supporting my peers. I approach every challenge with a calm, logical, and fair mindset, allowing me to deliver creative solutions and provide clear, in-depth explanations to complex problems. Passionate about full-stack development and software architecture, I am driven by a desire to continuously refine my technical skills and build robust systems that help others succeed.
-            </p>
+            <h2 class="section-title">About Me</h2>
+            <p style="margin-bottom: 1.5rem; font-size: 1.1rem;">Software exists to serve human beings, not just process data.</p>
+            <ul class="about-list">
+                <li><strong>Backend & Databases:</strong> Architecting C# / .NET applications, Node.js services, and structured PostgreSQL & SQL Server databases.</li>
+                <li><strong>Systems & Pipelines:</strong> Designing end-to-end web applications, real-time IoT data ingestion, and secure REST APIs.</li>
+                <li><strong>Documentation:</strong> A strong advocate for clear systems thinking, structured knowledge mapping, and explicit documentation in Obsidian.</li>
+                <li><strong>Beyond the Screen:</strong> Hands-on with automotive electronics and diagnostics, hi-fi audio setups, and multi-day wilderness hikes.</li>
+            </ul>
         </section>
 
         <section>
-            <h3 class="section-title">Technical Expertise</h3>
-            <div class="skills-grid">
-                <div class="skill-tag">C# & .NET</div>
-                <div class="skill-tag">PostgreSQL</div>
-                <div class="skill-tag">Node.js</div>
-                <div class="skill-tag">Express</div>
-                <div class="skill-tag">Clean Architecture</div>
-                <div class="skill-tag">RESTful APIs</div>
+            <h2 class="section-title">Technical Skills & Technologies</h2>
+            
+            <div class="skills-category">
+                <h4>Languages</h4>
+                <div class="badge-container">
+                    <img src="https://img.shields.io/badge/C%23-239120?style=for-the-badge&logo=c-sharp&logoColor=white" alt="C#">
+                    <img src="https://img.shields.io/badge/Java-ED8B00?style=for-the-badge&logo=openjdk&logoColor=white" alt="Java">
+                    <img src="https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=python&logoColor=white" alt="Python">
+                    <img src="https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black" alt="JavaScript">
+                    <img src="https://img.shields.io/badge/TypeScript-3178C6?style=for-the-badge&logo=typescript&logoColor=white" alt="TypeScript">
+                    <img src="https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge&logo=html5&logoColor=white" alt="HTML5">
+                    <img src="https://img.shields.io/badge/CSS3-1572B6?style=for-the-badge&logo=css3&logoColor=white" alt="CSS3">
+                </div>
+            </div>
+
+            <div class="skills-category">
+                <h4>Backend & Frameworks</h4>
+                <div class="badge-container">
+                    <img src="https://img.shields.io/badge/.NET_Core-512BD4?style=for-the-badge&logo=dotnet&logoColor=white" alt=".NET Core">
+                    <img src="https://img.shields.io/badge/Node.js-339933?style=for-the-badge&logo=nodedotjs&logoColor=white" alt="Node.js">
+                    <img src="https://img.shields.io/badge/Express.js-000000?style=for-the-badge&logo=express&logoColor=white" alt="Express.js">
+                    <img src="https://img.shields.io/badge/REST_APIs-0055DA?style=for-the-badge&logo=postman&logoColor=white" alt="REST APIs">
+                </div>
+            </div>
+
+            <div class="skills-category">
+                <h4>Databases & ORMs</h4>
+                <div class="badge-container">
+                    <img src="https://img.shields.io/badge/PostgreSQL-4169E1?style=for-the-badge&logo=postgresql&logoColor=white" alt="PostgreSQL">
+                    <img src="https://img.shields.io/badge/SQL_Server-CC292B?style=for-the-badge&logo=microsoftsqlserver&logoColor=white" alt="SQL Server">
+                    <img src="https://img.shields.io/badge/T--SQL-CC292B?style=for-the-badge&logo=microsoftsqlserver&logoColor=white" alt="T-SQL">
+                    <img src="https://img.shields.io/badge/Entity_Framework-512BD4?style=for-the-badge&logo=dotnet&logoColor=white" alt="Entity Framework">
+                </div>
+            </div>
+
+            <div class="skills-category">
+                <h4>Tools & Environments</h4>
+                <div class="badge-container">
+                    <img src="https://img.shields.io/badge/Git-F05032?style=for-the-badge&logo=git&logoColor=white" alt="Git">
+                    <img src="https://img.shields.io/badge/GitHub-181717?style=for-the-badge&logo=github&logoColor=white" alt="GitHub">
+                    <img src="https://img.shields.io/badge/Docker-2496ED?style=for-the-badge&logo=docker&logoColor=white" alt="Docker">
+                    <img src="https://img.shields.io/badge/Postman-FF6C37?style=for-the-badge&logo=postman&logoColor=white" alt="Postman">
+                    <img src="https://img.shields.io/badge/Obsidian-7A3EE8?style=for-the-badge&logo=obsidian&logoColor=white" alt="Obsidian">
+                    <img src="https://img.shields.io/badge/Power_Apps-742774?style=for-the-badge&logo=microsoftpowerapps&logoColor=white" alt="Power Apps">
+                </div>
             </div>
         </section>
 
         <section>
-            <h3 class="section-title">Featured Projects</h3>
-            <div class="project-card">
-                <h4 class="project-title">Green Blanket System</h4>
-                <div class="date-role">Lead Backend Developer | Feb 2026 - May 2026</div>
-                <p class="about-text">
-                    Developed the backend infrastructure for an IoT environmental water quality monitoring platform deployed at the Hartbeespoort Dam. Engineered robust API endpoints, analytical database models, and scalable server architecture to handle real-time telemetry data.
-                </p>
+            <h2 class="section-title">Featured Projects & Repositories</h2>
+            <div class="projects-grid">
+                
+                <div class="card">
+                    <h3>The Green Blanket | Eco-Tech IoT Pipeline</h3>
+                    <p>A comprehensive environmental monitoring system developed to track water quality conditions (specifically Hartbeespoort Dam) in real-time. Features complex data ingestion pipelines, analytical processing, and an interactive frontend dashboard.</p>
+                    <div class="focus">Node.js | Express | PostgreSQL | REST APIs</div>
+                    <div style="display: flex; gap: 10px;">
+                        <a href="https://github.com/IEP-The-Green-Blanket/Back-End" target="_blank">Backend</a>
+                        <a href="https://github.com/IEP-The-Green-Blanket/Front-End" target="_blank">Frontend</a>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <h3>Diabetes Risk Segmentation</h3>
+                    <p>A health-tech data analysis and decision support tool designed to segment user data and evaluate diabetes risk factors using structured datasets and algorithmic evaluation.</p>
+                    <div class="focus">Data Structuring | Risk Modeling | Decision Support</div>
+                    <a href="https://github.com/mnrjared/Diabetes-Risk-Segmentation-and-Decision-Support-System" target="_blank">View Project</a>
+                </div>
+
+                <div class="card">
+                    <h3>Credit Risk Assessment Platform</h3>
+                    <p>A financial analytics system built to assess and categorize credit risk. Showcases strong capabilities in managing analytical datasets, backend logic, and risk modeling.</p>
+                    <div class="focus">Data Analysis | Algorithmic Processing | System Logic</div>
+                    <a href="https://github.com/mnrjared/Credit-Risk-Assessment" target="_blank">View Project</a>
+                </div>
+
+                <div class="card">
+                    <h3>Enterprise Web Architecture (WPR381)</h3>
+                    <p>Collaborative full-stack web application. Demonstrates advanced frontend-to-backend integration, robust API routing, and clean code architecture.</p>
+                    <div class="focus">Web Development | Client-Server | RESTful Principles</div>
+                    <a href="https://github.com/AidanSm2103/WPR381_Project" target="_blank">View Project</a>
+                </div>
+
+                <div class="card">
+                    <h3>Milly's Chocolate Factory</h3>
+                    <p>An application built to model enterprise business workflows, order processing, and inventory management, emphasizing structured object-oriented design and data encapsulation.</p>
+                    <div class="focus">OOP | Data Structures | Application Logic</div>
+                    <a href="https://github.com/TobesOfCode/MillysChocolateFactory" target="_blank">View Project</a>
+                </div>
+
+                <div class="card">
+                    <h3>Advanced System Programming (PRG381)</h3>
+                    <p>Enterprise-level programming project focused on advanced object-oriented programming (OOP) principles, relational database integration, and scalable system design.</p>
+                    <div class="focus">C# / .NET | Entity Framework | System Architecture</div>
+                    <a href="https://github.com/Waldo-Blom/PRG381_Project_PTA381_AM_Group-3" target="_blank">View Project</a>
+                </div>
+
             </div>
         </section>
 
         <section>
-            <h3 class="section-title">Experience</h3>
-            <div class="experience-card">
-                <h4 class="project-title">WaverleyMed</h4>
-                <div class="date-role">Student Administrator & Receptionist | 2025 - Present</div>
-                <p class="about-text">Managing administrative operations and providing front-line support, requiring high-level communication, organization, and a calm approach to daily challenges.</p>
-            </div>
-             <div class="experience-card">
-                <h4 class="project-title">Nuvilux PTY LTD</h4>
-                <div class="date-role">Production & Administration Assistant | 2016 - 2024</div>
-                <p class="about-text">Ensured seamless production workflows and administrative efficiency through dedicated organizational support and problem-solving over an eight-year tenure.</p>
+            <h2 class="section-title">GitHub Activity & Metrics</h2>
+            <div class="stats-container">
+                <div class="stats-row">
+                    <img src="https://github-readme-stats.shion.dev/api?username=TobesOfCode&show_icons=true&theme=tokyonight&hide_border=true" height="170" alt="GitHub Stats" />
+                    <img src="https://github-readme-stats.shion.dev/api/top-langs/?username=TobesOfCode&layout=compact&theme=tokyonight&hide_border=true&hide=html,css" height="170" alt="Top Languages" />
+                </div>
+                <img src="https://github-readme-streak-stats-eight.vercel.app?user=TobesOfCode&theme=tokyonight&hide_border=true" alt="Commit Streak" />
             </div>
         </section>
 
     </div>
 
     <footer>
-        <p>&copy; 2026 Tobie Jansen van Vuuren. All rights reserved.</p>
+        <p>“Simplicity is prerequisite for reliability.” — Edsger W. Dijkstra</p>
     </footer>
 
 </body>
